@@ -1,0 +1,16 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../iron-selector/iron-selector.html">
+<dom-module id="wstcpyt-selector">
+    <link rel="import" type="css" href="css/wstcpyt-selector.css">
+    <template>
+        <paper-card z="1">
+            <div class="scroll">
+                <iron-selector id="coreselector"  selected={{selected}}>
+                    <content select="div"></content>
+                </iron-selector>
+            </div>
+        </paper-card>
+    </template>
+</dom-module>
+<script src="src/wstcpyt-selector.js"></script>

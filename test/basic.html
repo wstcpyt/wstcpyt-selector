@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>collapse-menu-basic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../bower_components/test-fixture/test-fixture-mocha.js"></script>
+    <link rel="import" href="../bower_components/test-fixture/test-fixture.html">
+    <link rel="import" href="../wstcpyt-selector.html">
+</head>
+<body>
+<test-fixture id="basic">
+    <template>
+        <wstcpyt-selector selected="0">
+            <div attr="attr1" name = "item1">item1</div>
+            <div attr="attr2" name = "item2">item2</div>
+            <div attr="attr3" name = "item3">item3</div>
+        </wstcpyt-selector>
+    </template>
+</test-fixture>
+
+<script>
+    suite('basic', function () {
+        var wstcpytselector;
+        suite('data binding between peter-selector and core-selector', function () {
+            setup(function () {
+                wstcpytselector = fixture('basic');
+            });
+            test('core-selected-initial-selected-value', function () {
+                selected = wstcpytselector.$.coreselector.selected;
+                assert.equal(selected, '0');
+            });
+            test('core-selected-can-response-to-selected-change', function () {
+                wstcpytselector.$.coreselector.children[1].click();
+                assert.equal(wstcpytselector.$.coreselector.selected, 1)
+            });
+            test('peter-selected-can-set-selected', function() {
+                wstcpytselector.selected = '1';
+                assert.equal(wstcpytselector.$.coreselector.selected, 1)
+            });
+            test('test-two-way-data-binding', function() {
+                wstcpytselector.$.coreselector.children[2].click();
+                assert.equal(wstcpytselector.selected, '2')
+            });
+            test('handleselectedchange', function () {
+                wstcpytselector.$.coreselector.children[0].click();
+                assert.equal(wstcpytselector.selectedtext, 'item1');
+                assert.equal(wstcpytselector.selectedattr, 'attr1')
+            })
+        });
+    });
+</script>
+</body>
+</html>
